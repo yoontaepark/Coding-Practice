@@ -1,3 +1,4 @@
+#Practice2
 #연산자
 print(1+1) # 2
 print(3-2) # 1
