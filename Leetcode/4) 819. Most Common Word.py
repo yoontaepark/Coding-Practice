@@ -30,32 +30,32 @@
 
 
 # Solution1
-# class Solution:
-#     def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
-#         # preprosessing: 1) delete not words(i.e: , ), 2) lower word, 3) split 4) exclude banned
-#         words = [word for word in re.sub(r'[^\w]', ' ', paragraph).lower().split() if word not in banned]
+class Solution:
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+        # preprosessing: 1) delete not words(i.e: , ), 2) lower word, 3) split 4) exclude banned
+        words = [word for word in re.sub(r'[^\w]', ' ', paragraph).lower().split() if word not in banned]
         
-#         # make defaultdict and append 
-#         counts = collections.defaultdict(int)
+        # make defaultdict and append 
+        counts = collections.defaultdict(int)
         
-#         for word in words: 
-#             counts[word] += 1
+        for word in words: 
+            counts[word] += 1
         
-#         # return max key based on value        
-#         return max(counts, key=counts.get)
+        # return max key based on value        
+        return max(counts, key=counts.get)
 
 
 # Solution2
-# class Solution:
-#     def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
-#         # preprocessing: change not word into space, lower, split, include not in banned
-#         words = [word for word in re.sub(r'[^\w]', ' ', paragraph).lower().split() if word not in banned]
+class Solution:
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+        # preprocessing: change not word into space, lower, split, include not in banned
+        words = [word for word in re.sub(r'[^\w]', ' ', paragraph).lower().split() if word not in banned]
         
-#         # make dict by using collections.Counter
-#         counts = collections.Counter(words)
+        # make dict by using collections.Counter
+        counts = collections.Counter(words)
         
-#         # use most_common to find max item and return value
-#         return counts.most_common(1)[0][0]
+        # use most_common to find max item and return value
+        return counts.most_common(1)[0][0]
 
 
 
