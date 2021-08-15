@@ -39,5 +39,5 @@ class Solution:
                   
 # Solution2: Try to compare some of the numbers
 
-# Solution3:
+# Solution3: try to 
 
