@@ -34,6 +34,7 @@ class Solution:
     def reverseString(self, s: List[str]) -> None:
         """
         Do not return anything, modify s in-place instead.
+        also, s = s[::-1] will work  
         """
         s[:] = s[::-1]
         
