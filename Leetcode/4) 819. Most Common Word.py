@@ -33,6 +33,7 @@
 class Solution:
     def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
         # preprosessing: 1) delete not words(i.e: , ), 2) lower word, 3) split 4) exclude banned
+        # since python cannot interpret \, use r to interpret those signs 
         words = [word for word in re.sub(r'[^\w]', ' ', paragraph).lower().split() if word not in banned]
         
         # make defaultdict and append 
