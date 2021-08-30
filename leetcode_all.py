@@ -45,7 +45,7 @@ class Solution:
 class Solution:
     def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
         # delete except alphabet, change to lowercase, split, and del banned
-        words = [word for word in re.sub(r'[^\w]', ' ', paragraph)
+        words = [word for word in re.sub(r'[^\w]', '  ', paragraph)
                 .lower().split() if word not in banned]
         
         # use collections.Counter w most_common method
@@ -160,6 +160,116 @@ class Solution:
         
         # return sum of even indexes
         return sum(nums[::2])
+        
+                
+# 238. Product of Array Except Self
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        
+        # initialize
+        out = []        
+        
+        # make left/right multiples for each index(excluding self)
+        # left multiples for each
+        p = 1
+        for i in range(0, len(nums)):
+            out.append(p)
+            p *= nums[i]
+        
+        
+        # multiply right to left
+        p = 1
+        for i in range(len(nums)-1, -1, -1):
+            out[i] *= p
+            p *= nums[i]
+            
+        return out
 
+
+# 121. Best Time to Buy and Sell Stock
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        # initialize profit = 0 and min_price to max
+        profit = 0
+        min_price = sys.maxsize
+        
+        # use loop to check min_price & max profit        
+        for price in prices:
+            min_price = min(min_price, price)
+            profit = max(profit, price-min_price)
+        
+        return profit
+
+
+# 234. Palindrome Linked List
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:   
+        
+        # Exception
+        if not head:
+            return True
+        
+        # change linked list to list to check palindrome
+        # also, to use deque to decrease runtime
+        q = collections.deque()
+        
+        node = head
+        
+        while node is not None:
+            q.append(node.val)
+            node = node.next
+        
+        # check palindrome
+        while len(q) > 1:
+            if q.popleft() != q.pop():
+                return False
+            
+        return True
                 
-                
+
+# 21. Merge Two Sorted Lists
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        
+        # if l1 x or l2 head is smaller, than change
+        if not l1 or (l2 and l1.val > l2.val):
+            l1, l2 = l2, l1
+        
+        # fix l1 but change l1.next to use recursion
+        if l1:
+            l1.next = self.mergeTwoLists(l1.next, l2)
+        
+        return l1
+
+
+# 206. Reverse Linked List
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        
+        # use recursion
+        def reverse(node, prev=None):
+            # exception, recursion out
+            if not node:
+                return prev
+            
+            # move node -> prev by using next
+            next, node.next = node.next, prev
+            return reverse(next, node)
+        
+        return reverse(head)
+
