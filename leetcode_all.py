@@ -322,7 +322,112 @@ class Solution:
         resultStr = int(''.join(str(e) for e in a)) + \
                     int(''.join(str(e) for e in b))
             
-        return self.toReversedLinkedList(str(resultStr))       
+        return self.toReversedLinkedList(str(resultStr))
+            
+
+        
+# 24. Swap Nodes in Pairs
+# 반복 구조로 스왑한다. 결과용 root와 실제 조정할 위치를 정하기 위한 prev,
+# 자리 바꾸기 위한 head(원본)와 b를 준비한다.
+# root, prev의 next자리에 head를 놓고, 맨앞 두개만 바꾼 2,1,3,4를 prev.next에 갈아끼운다
+# prev는 위치를 next,next로 옮긴다. 
+# 이걸 한번 더 반복하면, prev가 1,(3,4) 지점에서 시작해서 3,4가 4,3으로 바뀐다. 
+# 그리고 root는 2,1,(4,3) 같이 변하는데, 링크드 리스트라서 그런지 뒷부분만 
+# 마치 root.next.next = prev 인거처럼 바뀐다. 
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+class Solution:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        root = prev = ListNode(None)
+        prev.next = head
+        
+        while head and head.next:
+            b = head.next
+            head.next = b.next
+            b.next = head
+            
+            prev.next = b
+            # print('Before')
+            # print('root:', root.val, root.next)
+            # print('prev:', prev.val, prev.next)
+            
+            
+            head = head.next
+            prev = prev.next.next
+            # print('After')
+            # print('root:', root.val, root.next)
+            # print('prev:', prev.val, prev.next)
+            
+        return root.next
+
+        
+# 328. Odd Even Linked List
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None:
+            return None
+        
+        odd = head
+        even = head.next
+        even_head = head.next
+        # print(head.val, head.next)
+        
+        # .next로 붙을때 head랑 even_head의 next도 같이 바뀐다. val은 유지
+        # odd, even 자체가 바뀌는건 head와 even_head에는 영향이 없음(왠지는 모름)
+        while even and even.next:
+            odd.next, even.next = odd.next.next, even.next.next
+            odd, even = odd.next, even.next
+            print(odd.val, odd.next)
+            print(head.val, head.next)
+                
+        # 여기서 odd.next에 2,4,n을 붙이는건 알겠는데
+        # 그러면 1,3,5,n 에 2,4가 붙는게 아니라
+        # 1,2,4,n 인거 아니냐?
+        # 그냥 링크드 리스트라 바로 뒤에 붙는다고 생각하자 
+
+        odd.next = even_head
+
+        return head
+            
+        
+# 92. Reverse Linked List II
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
+        if not head or left == right:
+            return head
+        
+        root = start = ListNode(None)
+        root.next = head
+        
+        for _ in range(left-1):
+            start = start.next
+        end = start.next
+            
+        # 다중할당은 순환하면서 계속 변환을 시키는 컨셉임
+        # 따라서 tmp는 최초에 2,3,4,5였지만, tmp.next는 end.next.next 임
+        # (tmp = start.next = end.next 니까) 
+        # 결국 end.next.next를 따라서 tmp.next는 4,5가 됨
+        
+        for _ in range(right-left):
+            tmp, start.next, end.next = start.next, end.next, end.next.next
+            start.next.next = tmp        
+            
+        return root.next
+        
         
         
         
