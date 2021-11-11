@@ -1,3 +1,5 @@
+# https://www.hackerrank.com/challenges/nested-list/problem
+
 if __name__ == '__main__':
   # create list for nested list, and set to store second lowest score
     students = []
