@@ -35,6 +35,7 @@ class Solution:
     
 #     - (Medium) Leetcode 17. Letter Combinations of a Phone Number: (https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
 #     - 풀이: 같은 맥락인데(위와), 아래에 dfs 돌리고, 위에서 dfs 재귀 치는걸 유의할 것 
+#            이건 그냥 암기하자: itertools -> list(map(list, itertools.permutations(nums)))
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
 
@@ -66,3 +67,75 @@ class Solution:
         dfs(0, '')
 
         return res    
+
+
+#     - (Medium) Leetcode 46. Permutations: (https://leetcode.com/problems/permutations)
+#     - 풀이: nested dfs 같은 유형인데 리턴을 안받고 res.append를 하는 유형 (리턴해도 됨)
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        # case1: dfs
+        # assign result list and prev list (which will save the result and append to the result list)
+        res = []
+        prev = []
+
+        # main function
+        def dfs(elements):
+            # exit, if len == 0, append the result. note that we need to copy values only (not the references)
+            if len(elements) == 0:
+                res.append(prev[:]) # [:] copies only the value 
+                return 
+
+            # iterate and set up next_, and prev
+            for e in elements:
+                # for next_, we remove e from element list 
+                next_ = elements[:]
+                next_.remove(e)
+
+                # for prev, we append e, run dfs(next), pop prev
+                prev.append(e)
+                dfs(next_) # this ends when next_ is empty, and we append prev(pop didn't happen yet)
+                prev.pop()
+
+        # we simply run dfs algorithm 
+        dfs(nums)
+
+        # return result list 
+        return res    
+    
+        ### case2: itertools 
+        return list(map(list, itertools.permutations(nums)))    
+    
+
+#     - (Medium) Leetcode 77. Combinations: (https://leetcode.com/problems/combinations/)
+#     - 풀이: nested dfs 같은 유형인데 리턴을 받음. range의 끝이 고정인 유형 
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        # case1: dfs
+        res = []
+
+        def dfs(elements, start, end):
+            # exit code, we append result and exit 
+            if end == 0:
+                res.append(elements[:])
+                return
+            
+            # iteration for end is fixed, as we want to loop till the end 
+            # but starting point should be changed
+            for i in range(start, n+1):
+                # add i to given element 
+                elements.append(i)
+                # we want to run this function recursively, but not i itself
+                # also, we repeat until end = 0 (from so therefore, list is (k, k-1, ... 1), len(list) = k
+                dfs(elements, i+1, end-1)
+                # this is to remove end value and replace to next value
+                elements.pop()
+
+        # 1 is given as we need to choose numbers from the range (1, n)
+        # k is the given condition, and we will decrease this to 0 (and this makes k numbers of combination)
+        dfs([], 1, k)
+
+        # return final result
+        return res    
+    
+        ## case2: itertools
+        return list(map(list, itertools.combinations(range(1, n+1), k)))
