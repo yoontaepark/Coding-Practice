@@ -1,7 +1,9 @@
 '''
 6. Graph
 - 무기: 
-    - 개념적으로 아예 이해가 안될 건 아니니까 매일 다시 풀어보면서 암기를 하자 
+    - 개념적으로 아예 이해가 안될 건 아니니까 매일 다시 풀어보면서 암기를 하자
+    - dfs 로 대부분 풀린다. (일단 dfs로 풀고 안되면 못푼다고 생각하자)
+    - dfs의 다양한 유형들을 암기하고, 이것들을 유형화해서 추가추가하는 식으로 관리하자  
 '''
 import re
 from typing import List, Optional
@@ -139,3 +141,46 @@ class Solution:
     
         ## case2: itertools
         return list(map(list, itertools.combinations(range(1, n+1), k)))
+    
+    
+#     - (Medium) Leetcode 39. Combination Sum: (https://leetcode.com/problems/combination-sum/)
+#     - 풀이: nested dfs의 또 다른 유형 (sum - candidate 하면서 반복하는 케이스 )
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+
+        res = []
+        candidates.sort()
+
+        def dfs(csum, index, path):
+            if csum < 0:
+                return 
+            if csum == 0:
+                res.append(path[:])
+                return 
+
+            for i in range(index, len(candidates)):
+                dfs(csum-candidates[i], i, path+[candidates[i]])
+
+        dfs(target, 0, [])
+
+        return res    
+    
+    
+#     - (Medium) Leetcode 78. Subsets: (https://leetcode.com/problems/subsets/)
+#     - 풀이: nested dfs, return 없는 케이스 
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = []
+
+        def dfs(index, path):
+
+            res.append(path)
+            
+            for i in range(index, len(nums)):
+                dfs(i+1, path+[nums[i]])
+
+        dfs(0, [])
+
+        return res    
+    
+    
