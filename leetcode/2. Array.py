@@ -183,3 +183,34 @@ class Solution:
         # return profit
         return profit
     
+#     - (Medium) Leetcode 215. Kth Largest Element in an Array: (https://leetcode.com/problems/kth-largest-element-in-an-array)
+#     - 풀이: sorted, indexing 
+
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        # you sort the array, and take k-1 index (make sure you reversed)
+        return sorted(nums, reverse=True)[k-1]    
+    
+
+#     - (Medium) Leetcode 56. Merge Intervals: (https://leetcode.com/problems/merge-intervals/)
+#     - 풀이: 17장 정렬 부분에서 가져온 문제이지만, array 다루는 방법중 하나를 익히는 걸로 생각하자 
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        # assign an empty list
+        res = []
+
+        # iterate by sorted intervals 
+        for interval in sorted(intervals, key=lambda x: x[0]):
+            
+            # compare the next interval with result table
+            # if next interval's start value is less than or equal to last result's end value
+            # merge two lists by replacing max end value
+            if res and interval[0] <= res[-1][1]:
+                res[-1][1] = max(res[-1][1], interval[1]) 
+
+            # add intervals 
+            else:
+                res += [interval]
+
+        return res    
