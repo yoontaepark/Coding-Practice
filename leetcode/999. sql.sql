@@ -42,3 +42,35 @@ order by sell_date;
 select patient_id, patient_name, conditions
 from Patients
 where conditions like 'DIAB1%' or conditions like '% DIAB1%';
+
+
+-- 1965. Employees With Missing Information: (https://leetcode.com/problems/employees-with-missing-information/description/?envType=study-plan&id=sql-i)
+-- when we want to use outer join, we cannot use it in mysql, instead we use union of left join and right join
+-- when you do that, make sure that you are using 'using' clause instead of on, as we can't use duplicated on clause for union
+select T.employee_id
+from (select * from Employees left join Salaries using(employee_id)
+    union 
+    select * from Employees right join Salaries using(employee_id)) as T
+where T.name is null or T.salary is null
+order by T.employee_id;
+
+
+-- 1795. Rearrange Products Table: (https://leetcode.com/problems/rearrange-products-table/description/?envType=study-plan&id=sql-i)
+-- when you want to append the result row-wise, consider using 'union' of three select * 
+select product_id, 'store1' as store, store1 as price from Products where store1 is not null
+union
+select product_id, 'store2' as store, store2 as price from Products where store2 is not null
+union
+select product_id, 'store3' as store, store3 as price from Products where store3 is not null;   
+
+
+
+-- 608. Tree Node: (ttps://leetcode.com/problems/tree-node/description/?envType=study-plan&id=sql-i)
+-- case when then, when then, else end == if elif else
+select id, 
+case 
+when p_id is null then 'Root'
+when id in (select p_id from Tree) then 'Inner' 
+else 'Leaf'
+end as type
+from Tree;
