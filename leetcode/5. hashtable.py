@@ -7,10 +7,8 @@ import re
 from typing import List, Optional
 import collections
 
-# - 문제
-#     - (Medium) Leetcode 771. Jewels and Stones: (https://leetcode.com/problems/jewels-and-stones/)
+#     - Q2. (Medium) Leetcode 771. Jewels and Stones: (https://leetcode.com/problems/jewels-and-stones/)
 #     - 풀이: 너무 좋은 문제, collections.Counter 뿐만 아니라, one liner 풀이도 기억하기 
-
 class Solution:
     def numJewelsInStones(self, jewels: str, stones: str) -> int:
         # case1: use collection.Counter
@@ -25,7 +23,7 @@ class Solution:
         return sum(s in jewels for s in stones)
     
     
-#     - (Medium) Leetcode 3. Longest Substring Without Repeating Characters: 
+#     - Q3. (Medium) Leetcode 3. Longest Substring Without Repeating Characters: 
 #       (https://leetcode.com/problems/longest-substring-without-repeating-characters)
 #     - 풀이: 너무 좋은 문제, dict + two pointers (with one as an index)
 class Solution:
@@ -46,7 +44,7 @@ class Solution:
         return max_length
                 
                 
-#     - (Medium) Leetcode 347. Top K Frequent Elements: (https://leetcode.com/problems/top-k-frequent-elements)
+#     - Q4. (Medium) Leetcode 347. Top K Frequent Elements: (https://leetcode.com/problems/top-k-frequent-elements)
 #     - 풀이: most_common 쓰고 * unpack 한다음에 zip으로 앞에꺼만 모으기, 그 후에 [0]만 리턴 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:

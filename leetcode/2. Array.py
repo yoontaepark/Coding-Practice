@@ -8,8 +8,7 @@
 import re
 from typing import List
 
-# - 문제
-#     - (Easy) Leetcode 1. Two Sum: (https://leetcode.com/problems/two-sum/)
+#     - Q1. (Easy) Leetcode 1. Two Sum: (https://leetcode.com/problems/two-sum/)
 #     - 풀이: we can do brute force, but it will take O(n^2) time complexity. 
 #     - therefore, we use target-num vs nums_map strategy
 #     - two pointer method: always think of two pointer method for any array questions (for even three pointers)
@@ -45,7 +44,7 @@ class Solution:
         #     return [left, right]
         
 
-#     - (Hard) Leetcode 42. Trapping Rain Water: (https://leetcode.com/problems/trapping-rain-water/)
+#     - Q2. (Hard) Leetcode 42. Trapping Rain Water: (https://leetcode.com/problems/trapping-rain-water/)
 #     - 풀이:  two pointers, make sure that you assign left, right, left_max, right_max and move left/right pointers by given condition
 class Solution:
     def trap(self, height: List[int]) -> int:
@@ -78,7 +77,7 @@ class Solution:
         return volume
     
     
-#     - (Medium) Leetcode 15. 3Sum: (https://leetcode.com/problems/3sum/)
+#     - Q3. (Medium) Leetcode 15. 3Sum: (https://leetcode.com/problems/3sum/)
 #     - 풀이:  iterate i and use two pointers
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
@@ -129,9 +128,8 @@ class Solution:
         # return final result             
         return results 
                     
-
-
-#     - (Easy) Leetcode 561. Array Partition: (https://leetcode.com/problems/array-partition/)
+                    
+#     - Q4. (Easy) Leetcode 561. Array Partition: (https://leetcode.com/problems/array-partition/)
 #     - 풀이:  just think this as a sorting problem and adding index from 0 to the end by moving 2 indexes         
 class Solution:
     def arrayPairSum(self, nums: List[int]) -> int:
@@ -141,9 +139,8 @@ class Solution:
         return sum(sorted(nums)[::2])
     
     
-    
 
-#     - (Medium) Leetcode 238. Product of Array Except Self: (https://leetcode.com/problems/product-of-array-except-self/)
+#     - Q5. (Medium) Leetcode 238. Product of Array Except Self: (https://leetcode.com/problems/product-of-array-except-self/)
 #     - 풀이: think as left multiples times right multiples 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
@@ -167,7 +164,7 @@ class Solution:
         return res    
     
     
-#     - (Easy) Leetcode 121. Best Time to Buy and Sell Stock: (https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+#     - Q6. (Easy) Leetcode 121. Best Time to Buy and Sell Stock: (https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 #     - 풀이: assign min price and proft, then update by iterating time period    
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
@@ -183,18 +180,22 @@ class Solution:
         # return profit
         return profit
     
+    
+    
+    
+    
+    
+    
 #     - (Medium) Leetcode 215. Kth Largest Element in an Array: (https://leetcode.com/problems/kth-largest-element-in-an-array)
 #     - 풀이: sorted, indexing 
-
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         # you sort the array, and take k-1 index (make sure you reversed)
         return sorted(nums, reverse=True)[k-1]    
-    
+
 
 #     - (Medium) Leetcode 56. Merge Intervals: (https://leetcode.com/problems/merge-intervals/)
 #     - 풀이: 17장 정렬 부분에서 가져온 문제이지만, array 다루는 방법중 하나를 익히는 걸로 생각하자 
-
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         # assign an empty list

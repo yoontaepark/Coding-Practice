@@ -10,8 +10,7 @@ import re
 from typing import List, Optional
 import collections
 
-# - 문제
-#     - (Easy) Leetcode 20. Valid Parentheses: (https://leetcode.com/problems/valid-parentheses/)
+#     - Q1. (Easy) Leetcode 20. Valid Parentheses: (https://leetcode.com/problems/valid-parentheses/)
 #     - 풀이: create a reverse dict pair, and iterate symbol to either append or compare
 #     - note that, even we set an elif function, it conducts .pop(), and stack is directly updated 
 
@@ -41,7 +40,7 @@ class Solution:
         return len(stack) == 0    
         
         
-#     - (Medium) Leetcode 316. Remove Duplicate Letters: (https://leetcode.com/problems/remove-duplicate-letters/)
+#     - Q2. (Medium) Leetcode 316. Remove Duplicate Letters: (https://leetcode.com/problems/remove-duplicate-letters/)
 #     - 풀이: think of split point by using set 
 class Solution:
     def removeDuplicateLetters(self, s: str) -> str:
@@ -61,7 +60,7 @@ class Solution:
         return ''        
     
 
-#     - (Medium) Leetcode 739. Daily Temperatures: (https://leetcode.com/problems/daily-temperatures/)
+#     - Q3. (Medium) Leetcode 739. Daily Temperatures: (https://leetcode.com/problems/daily-temperatures/)
 #     - 풀이: similar to q 121, think of always adding an index and pop(the last) when current temp is higher 
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
@@ -84,7 +83,7 @@ class Solution:
         return res    
     
 
-#     - (Medium) Leetcode 225. Implement Stack using Queues: (https://leetcode.com/problems/implement-stack-using-queues/)
+#     - Q4. (Medium) Leetcode 225. Implement Stack using Queues: (https://leetcode.com/problems/implement-stack-using-queues/)
 #     - 풀이: push algo, use popleft + append 
 class MyStack:
 
@@ -111,7 +110,7 @@ class MyStack:
         return len(self.q) == 0
     
     
-#     - (Medium) Leetcode 232. Implement Queue using Stacks: (https://leetcode.com/problems/implement-queue-using-stacks/)
+#     - Q5. (Medium) Leetcode 232. Implement Queue using Stacks: (https://leetcode.com/problems/implement-queue-using-stacks/)
 #     - 풀이: Using two lists, peek algo: fill q2 if q2 is empty until q1 gets empty
 class MyQueue:
 
@@ -141,7 +140,7 @@ class MyQueue:
         return (len(self.q1)) == 0 and (len(self.q2) == 0)
     
     
-#     - (Medium) Leetcode 622. Design Circular Queue: (https://leetcode.com/problems/design-circular-queue/)
+#     - Q6. (Medium) Leetcode 622. Design Circular Queue: (https://leetcode.com/problems/design-circular-queue/)
 #     - 풀이: update front/rear by using % total length 
 class MyCircularQueue:
 

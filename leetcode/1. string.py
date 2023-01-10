@@ -1,5 +1,5 @@
 '''
-1. String Manipulation
+1. String
 - 무기: 
     - 정규식(regular expression) 으로 불필요 문자 필터링: re.sub(‘[^a-z0-9]’, ‘’, s)
     - Reverse: str -> s[::-1], list -> s.reverse()
@@ -11,12 +11,10 @@
 import re
 from typing import List
 
-# - 문제
-#     - (Easy) Leetcode 125. Valid Palindrome (https://leetcode.com/problems/valid-palindrome/)
+#     - Q1. (Easy) Leetcode 125. Valid Palindrome (https://leetcode.com/problems/valid-palindrome/)
 #     - 풀이: 문제 설명 따라가면 되는데 re.sub 과 s[::-1] 뒤집기 항상 숙지하고 있기
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-
         # after converting all uppercase letters into lowercase letters 
         s = s.lower()
         
@@ -27,19 +25,18 @@ class Solution:
         return s == s[::-1]
 
 
-    # - (Easy) Leetcode 344. Reverse String: (https://leetcode.com/problems/reverse-string/)
+    # - Q2. (Easy) Leetcode 344. Reverse String: (https://leetcode.com/problems/reverse-string/)
     # - 풀이: 리스트는 .reverse() 로 뒤집자 
 class Solution:
     def reverseString(self, s: List[str]) -> None:
         """
         Do not return anything, modify s in-place instead.
         """
-
         # use reverse function provided by list class in python
         s.reverse()
        
 
-    # - (Medium) Leetcode 937. Reorder Data in Log Files: https://leetcode.com/problems/reorder-data-in-log-files/)
+    # - Q3. (Medium) Leetcode 937. Reorder Data in Log Files: https://leetcode.com/problems/reorder-data-in-log-files/)
     # - 풀이: split()해서 isdigit() 확인하는거랑, lambda function 잘 숙지하자  
 class Solution:
     def reorderLogFiles(self, logs: List[str]) -> List[str]:
@@ -64,7 +61,7 @@ class Solution:
         return letter_list + digit_list
 
 
-    # - (Easy) 819. Most Common Word: (https://leetcode.com/problems/most-common-word/)
+    # - Q4. (Easy) 819. Most Common Word: (https://leetcode.com/problems/most-common-word/)
     # - 풀이: using list comprehension + get used to defaultdict + and use max(dict, key=dict.get) as argmax 
 import re
 import collections
@@ -98,7 +95,7 @@ class Solution:
         return max(counts, key=counts.get)
 
 
-    # - (Medium) 49. Group Anagrams: (https://leetcode.com/problems/group-anagrams/)
+    # - Q5. (Medium) 49. Group Anagrams: (https://leetcode.com/problems/group-anagrams/)
     # - 풀이: use defaultdict(list), and used sorted(word) as a key, and append word as a value 
     # - Then, use .values for the defaultdict to get values (+list() makes computation time more faster)
 class Solution:
@@ -117,7 +114,7 @@ class Solution:
         return list(anagrams.values())
     
     
-    # - (Medium) 5. Longest Palindromic Substring: (https://leetcode.com/problems/longest-palindromic-substring/)
+    # - Q6. (Medium) 5. Longest Palindromic Substring: (https://leetcode.com/problems/longest-palindromic-substring/)
     # - 풀이: get used to slicing window method, for both odd and even pointers      
 class Solution:
     def longestPalindrome(self, s: str) -> str:

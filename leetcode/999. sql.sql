@@ -64,7 +64,6 @@ union
 select product_id, 'store3' as store, store3 as price from Products where store3 is not null;   
 
 
-
 -- 608. Tree Node: (ttps://leetcode.com/problems/tree-node/description/?envType=study-plan&id=sql-i)
 -- case when then, when then, else end == if elif else
 select id, 
@@ -74,3 +73,12 @@ when id in (select p_id from Tree) then 'Inner'
 else 'Leaf'
 end as type
 from Tree;
+
+-- 176. Second Highest Salary: (https://leetcode.com/problems/second-highest-salary/description/?envType=study-plan&id=sql-i)
+-- ifnull (null, 아닐경우 값), LIMIT 행_갯수 OFFSET 시작행
+select ifnull (null, 
+(select distinct salary 
+from Employee
+order by salary desc
+limit 1
+offset 1)) as SecondHighestSalary;

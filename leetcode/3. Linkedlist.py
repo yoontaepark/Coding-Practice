@@ -1,5 +1,5 @@
 '''
-3. Linked List
+3. LinkedList 
 - 무기: 
     - self.val, self.next 항상 구도 생각하기
     - deque 개념: list + popleft and popright is done by O(1)
@@ -8,8 +8,7 @@
 import re
 from typing import List, Optional
 
-# - 문제
-#     - (Easy) Leetcode 234. Palindrome Linked List: (https://leetcode.com/problems/palindrome-linked-list/)
+#     - Q1. (Easy) Leetcode 234. Palindrome Linked List: (https://leetcode.com/problems/palindrome-linked-list/)
 #     - 풀이: deque - same as list but can use popleft, also compare by pop(0) or popleft() vs pop()
 
 # Definition for singly-linked list.
@@ -48,7 +47,7 @@ class Solution:
         return True
 
 
-#     - (Easy) Leetcode 21. Merge Two Sorted Lists: (https://leetcode.com/problems/merge-two-sorted-lists/)
+#     - Q2. (Easy) Leetcode 21. Merge Two Sorted Lists: (https://leetcode.com/problems/merge-two-sorted-lists/)
 #     - 풀이: deque - recursive function to compare both values and switch main list to smaller one 
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
@@ -64,7 +63,7 @@ class Solution:
         return list1        
 
 
-#     - (Easy) Leetcode 206. Reverse Linked List: (https://leetcode.com/problems/reverse-linked-list/)
+#     - Q3. (Easy) Leetcode 206. Reverse Linked List: (https://leetcode.com/problems/reverse-linked-list/)
 #     - 풀이: recursive or iterate, either way requires a new empty list that replaces orignial list.next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
@@ -101,7 +100,7 @@ class Solution:
         return prev
 
 
-#     - (M) Leetcode 2. Add Two Numbers: (https://leetcode.com/problems/add-two-numbers/)
+#     - Q4. (M) Leetcode 2. Add Two Numbers: (https://leetcode.com/problems/add-two-numbers/)
 #     - 풀이: we use almost everything we've learned in this linkedlist chapter
 
 class Solution:
@@ -145,7 +144,7 @@ class Solution:
         return self.toRevLinkedList(str(res))
 
 
-#     - (M) Leetcode 24. Swap Nodes in Pairs: (https://leetcode.com/problems/swap-nodes-in-pairs/)
+#     - Q5. (M) Leetcode 24. Swap Nodes in Pairs: (https://leetcode.com/problems/swap-nodes-in-pairs/)
 #     - 풀이: think this as a recursive function problem 
 class Solution:
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
@@ -167,7 +166,7 @@ class Solution:
         return head
 
 
-#     - (M) Leetcode 328. Odd Even Linked List: (https://leetcode.com/problems/odd-even-linked-list/)
+#     - Q6. (M) Leetcode 328. Odd Even Linked List: (https://leetcode.com/problems/odd-even-linked-list/)
 #     - 풀이: assigned head is updated by .next 
 class Solution:
     def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
@@ -199,7 +198,7 @@ class Solution:
         return head
  
 
-#     - (M) Leetcode 92. Reverse Linked List II: (https://leetcode.com/problems/reverse-linked-list-ii/)
+#     - Q7. (M) Leetcode 92. Reverse Linked List II: (https://leetcode.com/problems/reverse-linked-list-ii/)
 #     - 풀이: make sure you understand linking logic 
 class Solution:
     def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
