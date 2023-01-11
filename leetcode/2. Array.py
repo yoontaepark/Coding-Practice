@@ -49,7 +49,7 @@ class Solution:
 class Solution:
     def trap(self, height: List[int]) -> int:
         # this is an exception code, where height doesn't exist 
-        if not height:
+        if len(height) < 2:
             return 0
 
         # using two pointer method, that is assign start, end points as left and right
