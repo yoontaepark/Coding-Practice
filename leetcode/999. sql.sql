@@ -82,3 +82,60 @@ from Employee
 order by salary desc
 limit 1
 offset 1)) as SecondHighestSalary;
+
+
+-- 175. Combine Two Tables: (https://leetcode.com/problems/combine-two-tables/description/?envType=study-plan&id=sql-i)
+-- warm up question (will remove later)
+select p.firstName, p.lastName, a.city, a.state
+from Person as p
+left outer join Address as a 
+on p.personId = a.personId;
+
+
+-- 1581. Customer Who Visited but Did Not Make Any Transactions: (https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/description/?envType=study-plan&id=sql-i)
+-- warm up question, but also good to look up before any coding tests
+select v.customer_id, count(distinct v.visit_id) as count_no_trans from Visits as v
+left outer join Transactions as t on v.visit_id = t.visit_id
+where t.amount is null
+group by v.customer_id;
+
+
+-- 1148. Article Views I: https://leetcode.com/problems/article-views-i/description/?envType=study-plan&id=sql-i
+-- this is one of good methods to go over 
+select distinct author_id as id from Views
+where author_id = viewer_id
+order by id;
+
+-- 197. Rising Temperature: https://leetcode.com/problems/rising-temperature/description/?envType=study-plan&id=sql-i
+-- we can simply put two same tables not calling any join function, also remember to use to_days() function 
+select w2.id as id
+from Weather as w1, Weather as w2
+where (to_days(w2.recordDate) - to_days(w1.recordDate) = 1)
+and (w2.temperature > w1.temperature);
+
+
+-- 607. Sales Person: https://leetcode.com/problems/sales-person/description/?envType=study-plan&id=sql-i
+-- using multiple joins, and also think of not in statement 
+select s.name as name from SalesPerson as s
+where s.name not in (
+    select s.name from SalesPerson as s
+    left outer join Orders as o on s.sales_id = o.sales_id
+    left outer join Company as c on o.com_id = c.com_id
+    where c.name = 'RED'
+)
+
+-- 1141. User Activity for the Past 30 Days I: https://leetcode.com/problems/user-activity-for-the-past-30-days-i/description/?envType=study-plan&id=sql-i
+-- very simple question, and can ignore activity type 
+select activity_date as day, count(distinct user_id) as active_users
+from Activity
+where to_days('2019-07-27') - to_days(activity_date) < 30 
+and to_days('2019-07-27') - to_days(activity_date) >= 0
+group by activity_date;
+
+-- 1693. Daily Leads and Partners: https://leetcode.com/problems/daily-leads-and-partners/description/?envType=study-plan&id=sql-i
+-- 굳이 넣어야?
+select date_id, make_name, count(distinct lead_id) as unique_leads, 
+count(distinct partner_id) as unique_partners
+from DailySales
+group by date_id, make_name;
+
