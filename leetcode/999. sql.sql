@@ -139,3 +139,32 @@ count(distinct partner_id) as unique_partners
 from DailySales
 group by date_id, make_name;
 
+
+-- 586. Customer Placing the Largest Number of Orders: https://leetcode.com/problems/customer-placing-the-largest-number-of-orders/description/?envType=study-plan&id=sql-i
+-- good to look once 
+select customer_number
+from Orders
+group by customer_number
+order by count(distinct order_number) desc
+limit 1;
+
+
+-- 511. Game Play Analysis I: https://leetcode.com/problems/game-play-analysis-i/description/?envType=study-plan&id=sql-i
+-- we can set min date to get the first date 
+select player_id, min(event_date) as first_login
+from Activity
+group by player_id
+
+
+-- 1890. The Latest Login in 2020: https://leetcode.com/problems/the-latest-login-in-2020/description/?envType=study-plan&id=sql-i
+-- similar to upper question 
+select user_id, max(time_stamp) as last_stamp
+from Logins
+where left(time_stamp, 4) = '2020'
+group by user_id
+
+-- 1741. Find Total Time Spent by Each Employee: https://leetcode.com/problems/find-total-time-spent-by-each-employee/description/?envType=study-plan&id=sql-i
+-- will remove this question 
+select event_day as day, emp_id, sum(out_time - in_time) as total_time
+from Employees
+group by day, emp_id;
