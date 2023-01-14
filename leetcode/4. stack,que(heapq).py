@@ -116,8 +116,8 @@ class MyQueue:
 
     def __init__(self):
         # using two stacks 
-        self.q1 = collections.deque()
-        self.q2 = collections.deque()        
+        self.q1 = []
+        self.q2 = []
 
     def push(self, x: int) -> None:
         self.q1.append(x)
@@ -138,6 +138,22 @@ class MyQueue:
 
     def empty(self) -> bool:
         return (len(self.q1)) == 0 and (len(self.q2) == 0)
+
+    # why can't I do below?     
+    # def __init__(self):
+    #     self.q1 = []
+
+    # def push(self, x: int) -> None:
+    #     self.q1.append(x)
+
+    # def pop(self) -> int:
+    #     return self.q1.pop(0)
+
+    # def peek(self) -> int:
+    #     return self.q1[0]
+
+    # def empty(self) -> bool:
+    #     return self.q1 == []    
     
     
 #     - Q6. (Medium) Leetcode 622. Design Circular Queue: (https://leetcode.com/problems/design-circular-queue/)
@@ -159,14 +175,14 @@ class MyCircularQueue:
         else:
             return False
 
-    # similar to enQueue, but using p1 
+    # similar to enQueue, but using p1 and changing as not None 
     def deQueue(self) -> bool:
-        if self.q[self.p1] is None:
-            return False
-        else:
+        if self.q[self.p1] is not None:
             self.q[self.p1] = None
             self.p1 = (self.p1 + 1) % self.maxlen
             return True
+        else:
+            return False
 
     def Front(self) -> int:
         return -1 if self.q[self.p1] is None else self.q[self.p1] 
@@ -180,7 +196,6 @@ class MyCircularQueue:
 
     def isFull(self) -> bool:
         return self.p1 == self.p2 and self.q[self.p1] is not None
-    
     
 
 #     - (Hard) Leetcode 23. Merge k Sorted Lists: (https://leetcode.com/problems/merge-k-sorted-lists/)
