@@ -168,3 +168,40 @@ group by user_id
 select event_day as day, emp_id, sum(out_time - in_time) as total_time
 from Employees
 group by day, emp_id;
+
+
+
+-- 1393. Capital Gain/Loss: https://leetcode.com/problems/capital-gainloss/description/?envType=study-plan&id=sql-i
+-- Very clever approach, need to always check
+select stock_name, sum(
+    case when operation = 'Buy' 
+    then -price
+    else price
+    end 
+    ) as capital_gain_loss
+from Stocks
+group by stock_name;
+
+
+-- 1407. Top Travellers: https://leetcode.com/problems/top-travellers/description/?envType=study-plan&id=sql-i
+-- using case when, also group by multiple columns as name itself is not a primary key 
+select u.name as name, 
+case 
+when sum(r.distance) is null then 0
+else sum(r.distance) 
+end 
+as travelled_distance 
+from Users as u
+left outer join Rides as r
+on u.id = r.user_id
+group by u.id, u.name
+order by travelled_distance desc, name asc;
+
+
+-- 1158. Market Analysis I: https://leetcode.com/problems/market-analysis-i/description/?envType=study-plan&id=sql-i
+-- using multiple condition on join on clause. This makes null counts and count function converts null into 0 
+select u.user_id as buyer_id, u.join_date as join_date, count(o.order_id) as orders_in_2019
+from Users as u 
+left outer join Orders as o
+on u.user_id = o.buyer_id and left(o.order_date, 4) = '2019'
+group by u.user_id;
