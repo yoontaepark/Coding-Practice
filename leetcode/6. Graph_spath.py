@@ -301,30 +301,38 @@ class Solution:
 #     - 풀이: 최단경로찾기) 다익스트라가 안됨(TLE), 안될경우의 대안을 생각해보기
 class Solution:
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
-        # we will be replacing prices for every nodes
-        # for init point, set to 0
-        prices = [float('inf')] * n
-        prices[src] = 0
+        # create a dicttionary that contains value as a list
+        # also, create a list of weight, so that we can truncate based on the weight condition
+        graph = collections.defaultdict(list)
+        for u, v, w in flights:
+            graph[u].append((v,w))
 
-        # iterate k times to update prices
-        # we use tmp price to make sure that for given i stop, we don't update original price more than i stops
-        for i in range(k+1):
-            # we copy prices to tmp
-            tmpPrices = prices.copy()
+        weight = [(sys.maxsize, k)] * n
 
-            # for s->d, we update p
-            for s, d, p in flights:
-                # if price for starting node is inf, we don't need to even check this node
-                if prices[s] == float('inf'):
-                    continue
-                
-                # if price is smaller, then update tmp price
-                if prices[s] + p < tmpPrices[d]:
-                    tmpPrices[d] = prices[s] + p
+        # define path to destination
+        Q = [(0, src, k)]
 
-            # after checking all nodes, we update original price
-            prices = tmpPrices
+        # we will loop this and end when it meets destination
+        while Q:
+            # for each lowest price node 
+            price, node, k = heapq.heappop(Q)
+            
+            # if node meets the destination, return the price
+            # note that price would be the lowest price, as we are using heapq
+            if node == dst:
+                return price
 
-        # return -1 if final node is not updated, else return final node price 
-        return -1 if prices[dst] == float('inf') else prices[dst] 
+            # until we use all stops, run below
+            if k >= 0:
+                # for each next nodes, add up price to get next node
+                for v, w in graph[node]:
+                    alt = price + w
+                    # only update when price is lower than saved weight or we have more stops left 
+                    if alt < weight[v][0] or k-1 >= weight[v][1]:
+                        weight[v] = (alt, k-1) # update weight
+                        heapq.heappush(Q, (alt, v, k-1)) # update new Q
+        
+        # if there is no such route, return -1
+        return -1
+        
     
