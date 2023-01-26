@@ -75,3 +75,40 @@ class Solution:
         # return the result
         return res
             
+# 76. Minimum Window Substring: https://leetcode.com/problems/minimum-window-substring/description/            
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        # create a dictionary on t
+        word_list = collections.Counter(t)
+        # missing word count
+        missing = len(t)
+        # initialization of start,end and left. right will be moving by iteration 
+        start = end = left = 0
+
+        # checking word with right pointer. right pointer will move forward from 1
+        for right, word in enumerate(s, 1):
+            # for every iteration, check if given word is in word list. Then -1 for missing
+            # for word list, -1 as well. As we are using collections.Counter function, 
+            # unseen word will be counted as 0 so the result would be -1 
+            missing -= word_list[word]>0 
+            word_list[word] -= 1
+            
+            # if missing arrives to 0, then we update below 
+            if missing == 0:
+                # left pointer checker: if given left pointer is not a target word, move 
+                while left < right and word_list[s[left]]<0:
+                    word_list[s[left]] += 1
+                    left += 1
+
+                # start, end point update
+                if not end or right-left < end-start:
+                    start, end = left, right
+
+                # general update: moving left pointers
+                word_list[s[left]] += 1
+                missing += 1
+                left += 1
+
+        # return final result        
+        return s[start:end]
+            
