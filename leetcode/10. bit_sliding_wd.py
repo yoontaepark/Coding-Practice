@@ -111,4 +111,36 @@ class Solution:
 
         # return final result        
         return s[start:end]
-            
+
+
+# 424. Longest Repeating Character Replacement: sliding window with two pointers 
+# make sure you understand that right-left-most_common = k, and if left_side > right_side, need to move pointers 
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        # find index right/left where max(right) - min(left) + 1 - most_common_cnt <= k
+        # then return right - left + 1 
+        # i.e AAAAB, k=2, we can set 4-0+1-4 <= 2, and return 4-0+1 = 5
+        # if k=0, then we can't change B, so we cannot return 5, but 4
+
+        # initialize pointers, and dict for most_common
+        left = 0
+        cnt = collections.Counter()
+
+        # then move right pointer
+        for right in range(len(s)):
+
+            # for each right pointer, add string count
+            cnt[s[right]] += 1
+
+            # then calculate most_common count 
+            # as most_common returns i.e. ((a,2)), we get 2 by [0][1]
+            most_common_cnt = cnt.most_common(1)[0][1] 
+
+            # move left pointer, if needed change is greater than k
+            # we don't need to save max count, as we are both moving left and right pointers at once
+            if right - left + 1 - most_common_cnt > k:
+                cnt[s[left]] -= 1
+                left += 1
+
+        # after checking all pointers, return final result
+        return right - left + 1            
