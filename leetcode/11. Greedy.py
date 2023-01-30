@@ -109,5 +109,23 @@ class Solution:
             
         # return final starting point             
         return start
+    
+# 455. Assign Cookies: https://leetcode.com/problems/assign-cookies/description/
+class Solution:
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:
+        # sort children / cookies
+        g.sort()
+        s.sort()
+        child_i, cookie_j = 0, 0
 
+        # compare each child-cookie pair and count
+        while child_i < len(g) and cookie_j < len(s):
+            # if cookie is larger than child, then child is filled and move
+            if g[child_i] <= s[cookie_j]:
+                child_i += 1
+            # if not, that means we are moving to the next cookie
+            cookie_j += 1
+
+        # return satisfied child
+        return child_i
 
