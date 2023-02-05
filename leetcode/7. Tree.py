@@ -279,3 +279,26 @@ class Solution:
         # return updated root
         return root    
         
+        
+# 938. Range Sum of BST: https://leetcode.com/problems/range-sum-of-bst/description/
+class Solution:
+    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+
+        # create a dfs and add values if val is in inclusive range (low, high)
+        def dfs(node):
+            if not node: return 0 # this is to convert values into 0 where conditions don't meet
+
+            # also, add some truncate terms
+            # if val < low, we truncate left cases. Same logic applies to the right cases
+            if node.val < low: return dfs(node.right)
+            elif node.val > high: return dfs(node.left)
+
+            # we will be returning val, and recursively check left/right child node to add val 
+            return node.val + dfs(node.left) + dfs(node.right)
+
+        
+        # run dfs and return its value
+        return dfs(root)
+
+
+                
