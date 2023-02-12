@@ -114,6 +114,7 @@ class Solution:
 
 
 # 424. Longest Repeating Character Replacement: sliding window with two pointers 
+# https://leetcode.com/problems/longest-repeating-character-replacement/
 # make sure you understand that right-left-most_common = k, and if left_side > right_side, need to move pointers 
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:

@@ -20,7 +20,7 @@ class Solution:
         return res
 
         # case2: one liner: s in condition for s in list(string)
-        return sum(s in jewels for s in stones)
+        # return sum(s in jewels for s in stones)
     
     
 #     - Q3. (Medium) Leetcode 3. Longest Substring Without Repeating Characters: 

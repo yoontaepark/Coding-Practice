@@ -301,4 +301,66 @@ class Solution:
         return dfs(root)
 
 
+# 783. Minimum Distance Between BST Nodes: https://leetcode.com/problems/minimum-distance-between-bst-nodes/description/
+class Solution:
+    # assign variables here
+    # we will update min res, so start from maxsize 
+    # for prev values, it should be updated more than 2, so start from -maxsize 
+    prev = -sys.maxsize
+    res = sys.maxsize
+
+    def minDiffInBST(self, root: Optional[TreeNode]) -> int:
+        # idea: we can start from the left-end and assign as prev
+        # then we move on to right node(it would be parent node, and next parent-right node)
+        
+        if root.left: # if left exists, go to left
+            self.minDiffInBST(root.left) 
+
+        # this applies to getting min value by comparing current - prev
+        self.res = min(self.res, root.val - self.prev)
+
+        # update prev
+        self.prev = root.val
+
+        if root.right: # applies same to right
+            self.minDiffInBST(root.right) 
+
+        # return result
+        return self.res     
                 
+                
+# 105. Construct Binary Tree from Preorder and Inorder Traversal: https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        # idea: use pop(0) of preorder as a index of inorder
+        # so, index is assigned as a node, and run recursive function on left/right 
+
+        # if inorder exists, run below, else None
+        if inorder:
+            # assign index from preorder
+            idx = inorder.index(preorder.pop(0)) 
+
+            # assign node
+            node = TreeNode(inorder[idx])
+
+            # also, run for left/right. Note that it should be a recursive function
+            node.left = self.buildTree(preorder, inorder[:idx])
+            node.right = self.buildTree(preorder, inorder[idx+1:])
+
+            return node
+
+# 215. Kth Largest Element in an Array: https://leetcode.com/problems/kth-largest-element-in-an-array/description/
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        # case1: using heapq
+        heap = list()
+        for n in nums:
+            heapq.heappush(heap, -n)
+
+        for _ in range(k-1):
+            heapq.heappop(heap)
+
+        return -heapq.heappop(heap)
+        
+        # # case2: you sort the array, and take k-1 index (make sure you reversed)
+        # return sorted(nums, reverse=True)[k-1]                

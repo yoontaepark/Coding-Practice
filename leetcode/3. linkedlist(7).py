@@ -8,7 +8,7 @@
 import re
 from typing import List, Optional
 
-#     - Q1. (Easy) Leetcode 234. Palindrome Linked List: (https://leetcode.com/problems/palindrome-linked-list/)
+#     - Q1. (Easy) Leetcode 234. Palindrome Linked List: (  /)
 #     - 풀이: deque - same as list but can use popleft, also compare by pop(0) or popleft() vs pop()
 
 import collections
