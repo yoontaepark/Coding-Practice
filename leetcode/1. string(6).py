@@ -7,6 +7,13 @@
     - Lambda 활용1(sort): letter_list.sort(key=lambda x: (x.split()[1:], x.split()[0])) 
     - List comprehension 사용, collections.defaultdict(int) 활용, dict의 argmax = max(dict, key=dict.get)
     - Slicing window 기법: create a function and iterate from i=0
+    
+https://leetcode.com/problems/valid-palindrome/
+https://leetcode.com/problems/reverse-string/
+https://leetcode.com/problems/reorder-data-in-log-files/
+https://leetcode.com/problems/most-common-word/
+https://leetcode.com/problems/group-anagrams/
+https://leetcode.com/problems/longest-palindromic-substring/    
 '''
 import re
 from typing import List
@@ -141,3 +148,5 @@ class Solution:
             result = max(result, expand(i, i+1), expand(i, i+2), key=len)
         
         return result
+    
+    

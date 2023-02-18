@@ -4,6 +4,13 @@
     - two sum 같은 경우에는: target-num 기법으로 하나 재끼고 하나만 찾는 방식
     - two pointer 기법: 시작점, 끝점 정해놓고 조건에 따라 시작+1 or 끝-1 하는 방식
     
+https://leetcode.com/problems/two-sum/
+https://leetcode.com/problems/trapping-rain-water/
+https://leetcode.com/problems/3sum/)
+https://leetcode.com/problems/array-partition/
+https://leetcode.com/problems/product-of-array-except-self/
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+https://leetcode.com/problems/kth-largest-element-in-an-array    
 '''
 import re
 from typing import List
