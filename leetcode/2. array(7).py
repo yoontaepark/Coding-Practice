@@ -192,7 +192,17 @@ class Solution:
 #     - 풀이: sorted, indexing 
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        # you sort the array, and take k-1 index (make sure you reversed)
+        # case1: using heapq
+        heap = list()
+        for n in nums:
+            heapq.heappush(heap, -n)
+
+        for _ in range(k-1):
+            heapq.heappop(heap)
+
+        return -heapq.heappop(heap)        
+        
+        # case2: you sort the array, and take k-1 index (make sure you reversed)
         return sorted(nums, reverse=True)[k-1]    
 
 

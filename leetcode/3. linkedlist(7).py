@@ -4,15 +4,22 @@
     - self.val, self.next 항상 구도 생각하기
     - deque 개념: list + popleft and popright is done by O(1)
     - 2번 문제가 종합세트니 이거는 항상 풀고 코테들어가기
+    
+https://leetcode.com/problems/palindrome-linked-list/
+https://leetcode.com/problems/merge-two-sorted-lists/
+https://leetcode.com/problems/reverse-linked-list/
+https://leetcode.com/problems/add-two-numbers/
+https://leetcode.com/problems/swap-nodes-in-pairs/
+https://leetcode.com/problems/odd-even-linked-list/
+https://leetcode.com/problems/reverse-linked-list-ii/
 '''
 import re
 from typing import List, Optional
 
-#     - Q1. (Easy) Leetcode 234. Palindrome Linked List: (  /)
+#     - Q1. (Easy) Leetcode 234. Palindrome Linked List: (https://leetcode.com/problems/palindrome-linked-list/)
 #     - 풀이: deque - same as list but can use popleft, also compare by pop(0) or popleft() vs pop()
-
+# 
 import collections
-
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         # # case 1: create a list and compare by pop(0) and pop()
@@ -99,44 +106,68 @@ class Solution:
 #     - 풀이: we use almost everything we've learned in this linkedlist chapter
 
 class Solution:
-    # this is a reverse linked list function
-    def reverseNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        node, prev = head, None
-        while node:
-            next_, node.next = node.next, prev
-            prev, node = node, next_
-        return prev
+        # we can simply iterate to add one by one from left, but putting carry variable to add 1 or not
+        # initialize dummy for a final result, and cur to move nodes, also set carry to add 1 or not in next digit
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:        
+        dummy = cur = ListNode(0)
+        carry = 0
 
-    # convert linked list to list
-    def toList(self, node: Optional[ListNode]) -> List:
-        res_list = []
-        while node:
-            res_list.append(node.val)
-            node = node.next
-        return res_list
+        # iterate until all three variables are used
+        while l1 or l2 or carry: 
+            if l1: # add l1 val and move to next pointer 
+                carry += l1.val
+                l1 =l1.next 
+            if l2: # add l2 val and move to next pointer 
+                carry += l2.val
+                l2 =l2.next 
 
-    # convert string to reversed linked list 
-    def toRevLinkedList(self, res: str) -> Optional[ListNode]:
-        prev = None
-        for r in res:
-            node = ListNode(r)
-            node.next = prev
-            prev = node
-        return prev
+            cur.next = ListNode(carry%10) # add remainder of carry to cur.next 
+            cur = cur.next # move to next node
+
+            # set carry to 1 or 0 for adding on the next digit
+            carry //= 10
+
+        # all set, return dummy.next to show the result 
+        return dummy.next    
+    
+    # # this is a reverse linked list function
+    # def reverseNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    #     node, prev = head, None
+    #     while node:
+    #         next_, node.next = node.next, prev
+    #         prev, node = node, next_
+    #     return prev
+
+    # # convert linked list to list
+    # def toList(self, node: Optional[ListNode]) -> List:
+    #     res_list = []
+    #     while node:
+    #         res_list.append(node.val)
+    #         node = node.next
+    #     return res_list
+
+    # # convert string to reversed linked list 
+    # def toRevLinkedList(self, res: str) -> Optional[ListNode]:
+    #     prev = None
+    #     for r in res:
+    #         node = ListNode(r)
+    #         node.next = prev
+    #         prev = node
+    #     return prev
 
     # add two lists (main function)
-    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+    # def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
 
-        # we reverse nodes and convert to list
-        a = self.toList(self.reverseNode(l1))
-        b = self.toList(self.reverseNode(l2))
+    #     # we reverse nodes and convert to list
+    #     a = self.toList(self.reverseNode(l1))
+    #     b = self.toList(self.reverseNode(l2))
         
-        # then add two lists. we convert each integers to string and join, then convert back to integer
-        # this is to have given digit number and add both integers 
-        res = int(''.join(str(x) for x in a)) + int(''.join(str(y) for y in b))
+    #     # then add two lists. we convert each integers to string and join, then convert back to integer
+    #     # this is to have given digit number and add both integers 
+    #     res = int(''.join(str(x) for x in a)) + int(''.join(str(y) for y in b))
 
-        # then, we convert the value to reversed linked list 
-        return self.toRevLinkedList(str(res))
+    #     # then, we convert the value to reversed linked list 
+    #     return self.toRevLinkedList(str(res))
 
 
 #     - Q5. (M) Leetcode 24. Swap Nodes in Pairs: (https://leetcode.com/problems/swap-nodes-in-pairs/)
@@ -191,7 +222,6 @@ class Solution:
         
         # return final head 
         return head
- 
 
 #     - Q7. (M) Leetcode 92. Reverse Linked List II: (https://leetcode.com/problems/reverse-linked-list-ii/)
 #     - 풀이: make sure you understand linking logic 
