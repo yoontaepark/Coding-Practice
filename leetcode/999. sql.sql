@@ -1,3 +1,4 @@
+-- SQL examples 
 -- Lc 1873. Calculate Special Bonus: (https://leetcode.com/problems/calculate-special-bonus)
 -- : case when * then * else * end 예제 
 select employee_id, 

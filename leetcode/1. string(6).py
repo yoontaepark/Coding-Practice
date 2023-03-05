@@ -137,7 +137,7 @@ class Solution:
         # return entire string
         if len(s) < 2 or s == s[::-1]: 
             return s
-
+    
         # this is normal logic 
         # initialize result
         result = ''
