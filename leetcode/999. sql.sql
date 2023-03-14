@@ -198,6 +198,14 @@ on u.id = r.user_id
 group by u.id, u.name
 order by travelled_distance desc, name asc;
 
+-- or you can write as below 
+select u.name as name, coalesce(sum(r.distance), 0) as travelled_distance
+from Users as u
+left outer join Rides as r
+on u.id = r.user_id
+group by u.id
+order by travelled_distance desc, name asc;
+
 
 -- 1158. Market Analysis I: https://leetcode.com/problems/market-analysis-i/description/?envType=study-plan&id=sql-i
 -- using multiple condition on join on clause. This makes null counts and count function converts null into 0 
@@ -206,3 +214,36 @@ from Users as u
 left outer join Orders as o
 on u.user_id = o.buyer_id and left(o.order_date, 4) = '2019'
 group by u.user_id;
+
+-- 182. Duplicate Emails: https://leetcode.com/problems/duplicate-emails/?envType=study-plan&id=sql-i
+-- think of using having function but not showing up the count field
+select email as Email
+from Person
+group by email
+having count(email) > 1; 
+
+-- 1050. Actors and Directors Who Cooperated At Least Three Times: https://leetcode.com/problems/actors-and-directors-who-cooperated-at-least-three-times/?envType=study-plan&id=sql-i
+-- Actually same type of the question
+select actor_id, director_id
+from ActorDirector
+group by actor_id, director_id
+having count(timestamp) >= 3;
+
+
+-- 1587. Bank Account Summary II: https://leetcode.com/problems/bank-account-summary-ii/?envType=study-plan&id=sql-i
+-- easy question
+select u.name, sum(t.amount) as balance
+from Transactions as t
+left outer join Users as u
+using (account)
+group by u.name
+having balance > 10000;
+
+-- 1084. Sales Analysis III: https://leetcode.com/problems/sales-analysis-iii/?envType=study-plan&id=sql-i
+-- think of min, max date and we can compare if both type is date
+select p.product_id, p.product_name
+from Sales as s
+left outer join Product as p
+using (product_id)
+group by p.product_id
+having min(s.sale_date) >= '2019-01-01' and max(s.sale_date) <= '2019-03-31'
