@@ -19,7 +19,7 @@ class Solution:
         for day in range(len(prices)-1):
             # if next index is larger, then buy current index price and sell at next index price 
             if prices[day+1] > prices[day]:
-                # add all results and after iteration,
+                # add all results and after iteration
                 profit += prices[day+1] - prices[day]
                 
         # return the final result
